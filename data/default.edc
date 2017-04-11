@@ -1,0 +1,193 @@
+collections {
+   filters {
+      filter {
+         name: "blurbackground";
+         script {
+            padding_set(0)
+            blur ({100})
+         }
+      }
+   }
+   group { "public.background";
+      parts {
+         swallow { "public.background";
+            desc { "default";
+            }
+         }
+         rect { "blue_line";
+            desc { "default";
+               rel1.to: "snap";
+               rel1.offset: 0 -1px;
+               rel2.to: "snap";
+               rel2.relative: 1.0 0.0;
+               color: "#3399FFFF";
+            }
+         }
+         rect { "background";
+            desc { "default";
+               rel1.to: "snap";
+               rel2.to: "snap";
+               color: 255 255 255 50;
+            }
+         }
+         snapshot { "snap"
+            desc { "default"
+               rel1.to_y: "public.settings";
+               rel1.offset: 0px -5px;
+               filter.code: "blurbackground";
+            }
+         }
+         swallow { "public.content";
+            desc { "default";
+               rel1.relative: 0.5 0.5;
+               rel2.relative: 0.5 0.5;
+               align: 0.5 0.5;
+               min: 200 0;
+            }
+         }
+         swallow { "public.system.ops";
+            desc { "default"
+               rel1.relative: 1.0 1.0;
+               rel1.offset: -10px -10px;
+               rel2.offset: -10px -10px;;
+               align: 1.0 1.0;
+               min: 40 40;
+            }
+         }
+         swallow { "public.system.activation"
+            desc { "default";
+               rel1.to: "public.system.ops";
+               rel1.relative:0.0 0.0;
+               rel2.to: "public.system.ops";
+               rel2.relative: 0.0 1.0;
+               rel2.offset:-10px 0px;
+               align: 1.0 0.5;
+               min: 40 20;
+            }
+         }
+         swallow { "public.session"
+            desc { "default";
+               rel1.to: "public.system.activation";
+               rel1.relative:0.0 0.0;
+               rel2.to: "public.system.activation";
+               rel2.relative: 0.0 1.0;
+               rel2.offset:-10px 0px;
+               align: 1.0 0.5;
+               min: 40 20;
+            }
+         }
+         swallow { "public.settings"
+            desc { "default";
+               rel1.to: "public.session";
+               rel1.relative:0.0 0.0;
+               rel2.to: "public.session";
+               rel2.relative: 0.0 1.0;
+               rel2.offset:-10px 0px;
+               align: 1.0 0.5;
+               min: 40 20;
+            }
+         }
+      }
+   }
+   group { "public.waiting";
+      parts {
+         swallow { "public.waiting"
+            desc { "default"
+               rel1.relative: 0.5 0.5;
+               rel2.relative: 0.5 0.5;
+               align: 0.5 0.5;
+            };
+         }
+      }
+   }
+   group { "public.login";
+      parts {
+         rect { "background"
+            desc { "default";
+               rel1.to: "snap";
+               rel2.to: "snap";
+               color: 255 255 255 50;
+            };
+         }
+         rect { "border_top";
+            desc { "default";
+               rel1.to: "background";
+               rel1.offset: -1 -1;
+               rel2.to: "background";
+               rel2.relative: 1.0 0.0;
+               rel2.offset: 0 0;
+               color: "#3399FFFF";
+            }
+         }
+         rect { "border_bottom";
+            desc { "default";
+               rel1.to: "background";
+               rel1.offset: -1 0;
+               rel1.relative: 0.0 1.0;
+               rel2.to: "background";
+               rel2.relative: 1.0 1.0;
+               rel2.offset: 0 0;
+               color: "#3399FFFF";
+            }
+         }
+         rect { "border_right";
+            desc { "default";
+               rel1.to: "background";
+               rel1.offset: 0 0;
+               rel1.relative: 1.0 0.0;
+               rel2.to: "background";
+               rel2.relative: 1.0 1.0;
+               rel2.offset: 0 0;
+               color: "#3399FFFF";
+            }
+         }
+         rect { "border_left";
+            desc { "default";
+               rel1.to: "background";
+               rel1.offset: -1 0;
+               rel1.relative: 0.0 0.0;
+               rel2.to: "background";
+               rel2.relative: 0.0 1.0;
+               rel2.offset: 0 0;
+               color: "#3399FFFF";
+            }
+         }
+         snapshot { "snap";
+            desc { "default";
+               rel1.offset: -10px -10px;
+               rel1.to: "public.user";
+               rel2.offset: 10px 10px;
+               rel2.to: "public.login_btn";
+               filter.code: "blurbackground";
+            }
+         }
+         swallow { "public.user";
+            desc { "default";
+               rel2.relative: 1.0 0.0;
+               min: 0 20;
+               align: 0.0 0.0;
+            }
+         }
+         swallow { "public.password"
+            desc { "default";
+               rel1.to: "public.user";
+               rel1.relative: 0.0 1.0;
+               rel2.to: "public.user";
+               rel2.relative: 1.0 1.0;
+               min: 0 20;
+               align: 0.0 0.0;
+            };
+         }
+         swallow { "public.login_btn";
+            desc { "default";
+               rel1.to: "public.password";
+               rel1.relative: 0.0 1.0;
+               rel2.to: "public.password";
+               rel2.relative: 1.0 1.0;
+               min: 0 20;
+               align: 0.0 0.0;
+            }
+         }
+      }
+   }
+}
