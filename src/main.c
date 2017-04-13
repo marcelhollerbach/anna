@@ -96,11 +96,11 @@ _read_com(void *data, Ecore_Fd_Handler *handler)
 }
 
 static int
-_com_init(void)
+_com_init(int argc, char *argv[])
 {
    int server_fd;
 
-   ctx = sp_client_init(SP_CLIENT_LOGIN_PURPOSE_GREETER_JOB);
+   ctx = sp_client_init(argc, argv, SP_CLIENT_LOGIN_PURPOSE_GREETER_JOB);
    if (!ctx) return EXIT_FAILURE;
 
    server_fd = sp_client_fd_get(ctx);
@@ -153,7 +153,7 @@ _sys_ops_init(void)
 EAPI_MAIN int
 elm_main(int argc, char **argv)
 {
-   STARTUP(_com_init())
+   STARTUP(_com_init(argc, argv))
    STARTUP(config_init())
    STARTUP(ui_init(_ui_login_cb));
    STARTUP(_sys_ops_init())
