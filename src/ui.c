@@ -140,8 +140,16 @@ _login_clicked(void *data, Evas_Object *obj, void *event_info)
    func();
 }
 
+static void
+_user_changed(void *data, Evas_Object *obj, void *event_info)
+{
+   void (*user_changed)(const char *username) = data;
+
+   user_changed(elm_object_text_get(obj));
+}
+
 int
-ui_init(void (*login_cb)(void))
+ui_init(void (*login_cb)(void), void (*user_changed)(const char *username))
 {
     Evas_Object *o;
 
@@ -158,6 +166,7 @@ ui_init(void (*login_cb)(void))
     evas_object_show(o);
 
     elements.login.user = o = elm_entry_add(win);
+    evas_object_smart_callback_add(o, "changed", _user_changed, user_changed);
     evas_object_size_hint_align_set(o, EVAS_HINT_FILL, EVAS_HINT_FILL);
     evas_object_size_hint_weight_set(o, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
     elm_object_text_set(o, config->default_user);
@@ -286,6 +295,28 @@ ui_add_session(const char *name, const char *icon, void *data)
          elm_object_text_set(elements.login.sessions, name);
          evas_object_data_set(elements.login.sessions, "__selection", e);
       }
+}
+void
+ui_select_session(const char *name)
+{
+   const Eina_List *items, *n;
+   Elm_Object_Item *item;
+
+   items = elm_hoversel_items_get(elements.login.sessions);
+
+   EINA_LIST_FOREACH(items, n, item)
+     {
+        Element *e;
+
+        e = elm_object_item_data_get(item);
+
+        if (!strcmp(e->name, name)) {
+            evas_object_data_set(elements.login.sessions, "__selection", e);
+
+            elm_object_text_set(elements.login.sessions, e->name);
+            return;
+        }
+     }
 }
 
 void

@@ -2,6 +2,9 @@
 
 static Sp_Client_Context *ctx;
 static Ecore_Fd_Handler *fd;
+static Numbered_Array username;
+static Numbered_Array templates;
+static Numbered_Array sessions;
 
 static void _data_cb(void);
 static void _login_cb(int success, char *msg);
@@ -27,13 +30,24 @@ _ui_login_cb(void)
     ui_mode_set(UI_MODES_WAITING);
 }
 
+static void
+_ui_username_changed(const char *name)
+{
+   for (int i = 0; i < username.length ; ++i) {
+      User u = USER_ARRAY(&username, i);
+
+      if (!!strcmp(name, u.name)) continue;
+
+      Template t = TEMPLATE_ARRAY(&templates, u.prefered_session);
+      ui_select_session(t.name);
+
+      return;
+   }
+}
 
 static void
 _data_cb(void) {
-    Numbered_Array templates;
-    Numbered_Array sessions;
-
-    sp_client_data_get(ctx, &sessions, &templates, NULL);
+    sp_client_data_get(ctx, &sessions, &templates, &username);
 
     /* fill the sessions to the ui */
     for(int i = 0; i < templates.length; i++) {
@@ -155,7 +169,7 @@ elm_main(int argc, char **argv)
 {
    STARTUP(_com_init(argc, argv))
    STARTUP(config_init())
-   STARTUP(ui_init(_ui_login_cb));
+   STARTUP(ui_init(_ui_login_cb, _ui_username_changed));
    STARTUP(_sys_ops_init())
 
    ui_mode_set(UI_MODES_PROMPTING);
