@@ -2,6 +2,7 @@ include_directories (
     ${SPCLIENT_INCLUDE_DIRS}
     ${ELEMENTARY_INCLUDE_DIRS}
     ${ECORE_INCLUDE_DIRS}
+    ${ECORE_FILE_INCLUDE_DIRS}
     ${CMAKE_SOURCE_DIR}
     ${CMAKE_CURRENT_BINARY_DIR}
 )
@@ -34,6 +35,7 @@ target_link_libraries (anna-greeter
     ${EVAS_LIBRARIES}
     ${SPCLIENT_LIBRARIES}
     ${ECORE_LIBRARIES}
+    ${ECORE_FILE_LIBRARIES}
     ${EDJE_LIBRARIES}
     ${EFREET_LIBRARIES}
     ${EET_LIBRARIES}

@@ -10,6 +10,7 @@ typedef struct {
         Evas_Object *password;
         Evas_Object *sessions;
         Evas_Object *button;
+        Evas_Object *image;
     } login;
     struct {
         Evas_Object *waiting;
@@ -48,6 +49,7 @@ Element_Content content[] = {
     {"public.user", &elements.login.user},
     {"public.password", &elements.login.password},
     {"public.login_btn", &elements.login.button},
+    {"public.icon", &elements.login.image},
     {"public.waiting", &elements.waiting.waiting},
     {"public.session", &elements.login.sessions},
     {"public.background", &elements.background},
@@ -187,6 +189,10 @@ ui_init(void (*login_cb)(void), void (*user_changed)(const char *username))
     if (config->default_user)
       elm_object_focus_set(o, EINA_TRUE);
 
+    elements.login.image = o = elm_icon_add(win);
+    evas_object_size_hint_align_set(o, EVAS_HINT_FILL, EVAS_HINT_FILL);
+    evas_object_size_hint_weight_set(o, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+
     elements.login.button = o = elm_button_add(win);
     evas_object_size_hint_align_set(o, EVAS_HINT_FILL, EVAS_HINT_FILL);
     evas_object_size_hint_weight_set(o, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
@@ -310,7 +316,7 @@ ui_select_session(const char *name)
 
         e = elm_object_item_data_get(item);
 
-        if (!strcmp(e->name, name)) {
+        if (!name || !strcmp(e->name, name)) {
             evas_object_data_set(elements.login.sessions, "__selection", e);
 
             elm_object_text_set(elements.login.sessions, e->name);
@@ -398,4 +404,33 @@ ui_get_session(void)
     e = evas_object_data_get(elements.login.sessions, "__selection");
 
     return e->data;
+}
+
+void
+ui_display_icon(const char *something)
+{
+   Evas_Object *image;
+
+   image = elements.login.image;
+
+   if (!something) goto fallback;
+
+   if (ecore_file_exists(something))
+     {
+        if (!elm_image_file_set(image, something, NULL))
+          goto err;
+     }
+   else
+     {
+        if (!elm_icon_standard_set(image, something))
+          goto err;
+     }
+   return;
+fallback:
+    elm_icon_standard_set(image, "start-here");
+    return;
+err:
+    printf("%s could not be set\n", something);
+    if (!elm_icon_standard_set(image, "face-embarrassed"))
+      printf("And even the fallback failed\n");
 }

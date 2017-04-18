@@ -155,15 +155,36 @@ collections {
          snapshot { "snap";
             desc { "default";
                rel1.offset: -10px -10px;
-               rel1.to: "public.user";
+               rel1.to: "icon_place";
                rel2.offset: 10px 10px;
                rel2.to: "public.login_btn";
                filter.code: "blurbackground";
             }
          }
+         spacer { "icon_place";
+            desc { "default";
+               rel1.relative: 0.0 0.0;
+               rel2.relative: 1.0 0.0;
+               min: 0 60;
+            }
+         }
+         swallow { "public.icon";
+            desc { "default";
+               rel1.offset: -20 -20;
+               rel1.to: "icon_place";
+               rel1.relative: 0.5 0.5;
+               rel2.to: "icon_place";
+               rel2.relative: 0.5 0.5;
+               rel2.offset: 20 20;
+               aspect: 1 1;
+            }
+         }
          swallow { "public.user";
             desc { "default";
-               rel2.relative: 1.0 0.0;
+               rel1.to: "icon_place";
+               rel1.relative: 0.0 1.0;
+               rel2.to: "icon_place";
+               rel2.relative: 1.0 1.0;
                min: 0 20;
                align: 0.0 0.0;
             }

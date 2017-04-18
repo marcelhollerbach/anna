@@ -41,8 +41,12 @@ _ui_username_changed(const char *name)
       Template t = TEMPLATE_ARRAY(&templates, u.prefered_session);
       ui_select_session(t.name);
 
+      ui_display_icon(u.icon);
+
       return;
    }
+   ui_display_icon(NULL);
+   ui_select_session(NULL);
 }
 
 static void
