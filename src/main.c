@@ -63,6 +63,7 @@ _data_cb(void) {
 
     /* set to prompting mode */
     ui_mode_set(UI_MODES_PROMPTING);
+    _ui_username_changed(ui_get_user());
 }
 
 static void
