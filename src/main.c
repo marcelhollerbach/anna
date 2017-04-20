@@ -119,7 +119,7 @@ _com_init(int argc, char *argv[])
 {
    int server_fd;
 
-   ctx = sp_client_init(argc, argv, SP_CLIENT_LOGIN_PURPOSE_GREETER_JOB);
+   ctx = sp_client_init(argc, argv);
    if (!ctx) return EXIT_FAILURE;
 
    server_fd = sp_client_fd_get(ctx);
