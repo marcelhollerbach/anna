@@ -50,6 +50,14 @@ _ui_username_changed(const char *name)
 }
 
 static void
+_run_session(void *data, Evas_Object *obj, void *event_info)
+{
+   Session *s = data;
+
+   sp_client_session_activate(ctx, s->id);
+}
+
+static void
 _data_cb(void) {
     sp_client_data_get(ctx, &sessions, &templates, &username);
 
@@ -61,8 +69,13 @@ _data_cb(void) {
 
     /* fill the active session to the ui */
     for (int i = 0; i < sessions.length; i++) {
+       Eina_Strbuf *buf = eina_strbuf_new();
        Session *s = &SESSION_ARRAY(&sessions, i);
-       ui_add_active_session(s->user, s->icon, s);
+       eina_strbuf_append(buf, s->user);
+       eina_strbuf_append(buf, " : ");
+       eina_strbuf_append(buf, s->name);
+       ui_add_active_session(eina_strbuf_string_steal(buf), s->icon, s, _run_session);
+       eina_strbuf_free(buf);
     }
 
     /* set to prompting mode */

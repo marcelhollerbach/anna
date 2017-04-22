@@ -17,7 +17,7 @@ const char* ui_get_password(void);
 void* ui_get_session(void);
 
 void ui_add_session(const char *name, const char *icon, void *data);
-void ui_add_active_session(const char *name, const char *icon, void *data);
+void ui_add_active_session(const char *name, const char *icon, void *data, Evas_Smart_Cb cb);
 void ui_add_system_op(System_Operation system_operation, const char *name, const char *icon);
 void ui_select_session(const char *name);
 void ui_display_icon(const char *something);

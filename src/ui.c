@@ -326,7 +326,7 @@ ui_select_session(const char *name)
 }
 
 void
-ui_add_active_session(const char *name, const char *icon, void *data)
+ui_add_active_session(const char *name, const char *icon, void *data, Evas_Smart_Cb cb)
 {
     Element *e;
 
@@ -336,7 +336,7 @@ ui_add_active_session(const char *name, const char *icon, void *data)
     e->name = strdup(name);
     e->icon = strdup(icon);
 
-    elm_hoversel_item_add(elements.active_sessions, name, icon, ELM_ICON_STANDARD, _sel, e);
+    elm_hoversel_item_add(elements.active_sessions, name, icon, ELM_ICON_STANDARD, cb, data);
 
     if (!elm_object_text_get(elements.active_sessions))
       {
