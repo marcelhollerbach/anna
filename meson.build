@@ -13,7 +13,15 @@ config_h = configuration_data()
 config_h.set_quoted('THEME_FILE', join_paths(get_option('prefix'), get_option('datadir'), 'anna', 'default.edj'))
 config_h.set_quoted('THEME_INSTALL_DIR', join_paths(get_option('prefix'), get_option('datadir'), 'anna'))
 
-spawnyClient = dependency('sp-client')
+spawnyClient = dependency('sp-client', required : false)
+
+if spawnyClient.found() != true
+   sp_subproject = subproject('spawny')
+   spawnyClient = declare_dependency(
+       dependencies : sp_subproject.get_variable('sp_client')
+   )
+endif
+
 elementary = dependency('elementary')
 top_inc = include_directories('.')
 
