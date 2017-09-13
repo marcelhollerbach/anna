@@ -1,0 +1,6 @@
+[wrap-file]
+directory = spawny-0.3.1
+
+source_url = https://github.com/marcelhollerbach/spawny/archive/v0.3.1.tar.gz
+source_filename = spawny-0.3.1.tar.gz
+source_hash = 3867fb242a85dcbcf6a3a410a6b62bca466a790d17e5227716b442fe9bd04373
