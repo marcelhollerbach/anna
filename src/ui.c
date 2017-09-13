@@ -118,13 +118,13 @@ _give_icon(Evas_Object *obj, const char *name)
 }
 
 static void
-settings_cb(void *data, Evas_Object *object, void *event)
+settings_cb(void *data EINA_UNUSED, Evas_Object *object EINA_UNUSED, void *event EINA_UNUSED)
 {
     config_start(win);
 }
 
 static void
-_enter_down(void *data, Evas_Object *obj, Evas *e, void *event_info)
+_enter_down(void *data EINA_UNUSED, Evas_Object *obj EINA_UNUSED, Evas *e EINA_UNUSED, void *event_info)
 {
    Evas_Event_Key_Down *down = event_info;
    void (*func)(void) = data;
@@ -136,14 +136,14 @@ _enter_down(void *data, Evas_Object *obj, Evas *e, void *event_info)
 }
 
 static void
-_login_clicked(void *data, Evas_Object *obj, void *event_info)
+_login_clicked(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    void (*func)(void) = data;
    func();
 }
 
 static void
-_user_changed(void *data, Evas_Object *obj, void *event_info)
+_user_changed(void *data, Evas_Object *obj, void *event_info EINA_UNUSED)
 {
    void (*user_changed)(const char *username) = data;
 
@@ -275,7 +275,7 @@ ui_mode_set(Ui_Modes names)
 }
 
 static void
-_sel(void *data, Evas_Object *obj, void *event_info)
+_sel(void *data, Evas_Object *obj, void *event_info EINA_UNUSED)
 {
     Element *e = data;
     evas_object_data_set(obj, "__selection", e);
@@ -363,7 +363,7 @@ ui_error_message(const char *title, const char *message)
 }
 
 static void
-_selection_cb(void *data, Evas_Object *obj, void *event_info)
+_selection_cb(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
     System_Operation_Entry *entry = data;
 

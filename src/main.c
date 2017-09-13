@@ -50,7 +50,7 @@ _ui_username_changed(const char *name)
 }
 
 static void
-_run_session(void *data, Evas_Object *obj, void *event_info)
+_run_session(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    Session *s = data;
 
@@ -94,7 +94,7 @@ _login_cb(int success, char *msg) {
 }
 
 static Eina_Bool
-_read_com(void *data, Ecore_Fd_Handler *handler)
+_read_com(void *data EINA_UNUSED, Ecore_Fd_Handler *handler)
 {
    Sp_Client_Read_Result res;
 
