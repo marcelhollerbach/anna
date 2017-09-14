@@ -7,4 +7,12 @@ gen_src = custom_target('gen-output',
   install : true,
   install_dir: join_paths(get_option('prefix'), get_option('datadir'), 'anna')
 )
+
 meson.add_install_script(chmod, 'a+r', join_paths(get_option('prefix'), get_option('datadir'), 'anna', 'default.edj'))
+
+configure_file( input : 'spawny.ini.in',
+  output : 'spawny.ini',
+  install : true,
+  install_dir : sp_config_path,
+  configuration: config_h
+)

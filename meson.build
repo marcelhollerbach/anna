@@ -12,6 +12,7 @@ add_global_arguments('-DHAVE_CONFIG_H=1', language: 'c')
 config_h = configuration_data()
 config_h.set_quoted('THEME_FILE', join_paths(get_option('prefix'), get_option('datadir'), 'anna', 'default.edj'))
 config_h.set_quoted('THEME_INSTALL_DIR', join_paths(get_option('prefix'), get_option('datadir'), 'anna'))
+config_h.set('PACKAGE_BIN_DIR', join_paths(get_option('prefix'), get_option('bindir')))
 
 spawnyClient = dependency('sp-client', required : false)
 
@@ -20,6 +21,9 @@ if spawnyClient.found() != true
    spawnyClient = declare_dependency(
        dependencies : sp_subproject.get_variable('sp_client')
    )
+   sp_config_path = join_paths(get_option('prefix'), get_option('sysconfdir'))
+else
+   sp_config_path = join_paths(spawnyClient.get_pkgconfig_variable('prefix') , 'etc')
 endif
 
 elementary = dependency('elementary')
