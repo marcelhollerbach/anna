@@ -1,6 +1,6 @@
 [wrap-file]
-directory = spawny-0.4
+directory = spawny-0.5.1
 
-source_url = https://github.com/marcelhollerbach/spawny/archive/v0.4.tar.gz
-source_filename = spawny-0.4.tar.gz
-source_hash = 0e8415df1df671b3f1750736dad439c913f60e9dbc111a9bc132882292f82f20
+source_url = https://github.com/marcelhollerbach/spawny/archive/v0.5.1.tar.gz
+source_filename = spawny-0.5.1.tar.gz
+source_hash = 510ce7b4893f07e07307713d51622bb0910927eb2fae675a0caf222ee04ba93f
