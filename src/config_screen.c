@@ -41,13 +41,13 @@ _config_write(void)
 }
 
 static void
-_close(void *data, Evas_Object *obj, void *event_info)
+_close(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
     evas_object_del(data);
 }
 
 static void
-_apply(void *data, Evas_Object *obj, void *event_info)
+_apply(void *data EINA_UNUSED, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    const char *tmp_background, *tmp_user;
 

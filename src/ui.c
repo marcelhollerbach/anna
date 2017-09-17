@@ -67,11 +67,6 @@ _clear_cb(void)
 }
 
 static void
-_config_flush(Config *c) {
-
-}
-
-static void
 _theme_unfill(Evas_Object *obj)
 {
     Edje_Object *edje;
