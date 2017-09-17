@@ -21,9 +21,6 @@ if spawnyClient.found() != true
    spawnyClient = declare_dependency(
        dependencies : sp_subproject.get_variable('sp_client')
    )
-   sp_config_path = join_paths(get_option('prefix'), get_option('sysconfdir'))
-else
-   sp_config_path = join_paths(spawnyClient.get_pkgconfig_variable('prefix') , 'etc')
 endif
 
 elementary = dependency('elementary')
