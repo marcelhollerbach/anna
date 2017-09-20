@@ -2,11 +2,13 @@
 anna is a greeter for spawny.
 
 ## install
-Build with : 
+Build with :
 
-cmake ..
-make all
-sudo make install 
+mkdir build
+cd build
+meson ..
+ninja all
+sudo ninja install
 
 This will install to /usr/local/ you can change the prefix as you like
 
